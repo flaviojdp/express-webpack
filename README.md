@@ -8,3 +8,5 @@ Step 4: Seperate App into Dev and Prod Builds
 Acrescentado mimificação
 
 Step 5
+
+Step 6: Add Hot Module Reloading
