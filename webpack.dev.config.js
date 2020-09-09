@@ -4,20 +4,15 @@ const nodeExternals = require('webpack-node-externals')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 module.exports = {
   entry: {
-    server: './src/server.js',
+    main: './src/index.js',
   },
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: '[name].js'
   },
-  target: 'node',
-  node: {
-    // Need this when working with express, otherwise the build fails
-    __dirname: false,   // if you don't put this is, __dirname
-    __filename: false,  // and __filename return blank or /
-  },
-  externals: [nodeExternals()], // Need this to avoid error when working with Express
+  target: 'web',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -32,13 +27,26 @@ module.exports = {
         // Loads the javacript into html template provided.
         // Entry point is set below in HtmlWebPackPlugin in Plugins 
         test: /\.html$/,
-        use: [{loader: "html-loader"}]
+        use: [
+          {
+            loader: "html-loader"
+            //options: { minimize: true }
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+       test: /\.(png|svg|jpg|gif)$/,
+       use: ['file-loader']
       }
     ]
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
+      template: "./src/html/index.html",
       filename: "./index.html",
       excludeChunks: [ 'server' ]
     })
