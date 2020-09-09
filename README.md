@@ -6,3 +6,5 @@ https://medium.com/@binyamin/creating-a-node-express-webpack-app-with-dev-and-pr
 Step 4: Seperate App into Dev and Prod Builds
 
 Acrescentado mimificação
+
+Step 5
